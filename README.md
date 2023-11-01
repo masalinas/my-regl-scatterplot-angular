@@ -7,7 +7,7 @@ A simple PoC where integrate the [regl-scatterplot](https://github.com/flekschas
 Install component in angular project
 
 `
-npm install regl-scatterplot --save
+$ npm install regl-scatterplot --save
 `
 
 Install d3-scale types
@@ -31,7 +31,8 @@ $ npm run build-library
 Copy dist folder generated inside the component folder into your angular project with the last build prepared for typescript
 
 `
-cp ./dist $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot -R
+$ rm $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot/dist -R
+$ cp ./dist $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot -R
 `
 
 Avoid comonjs warning in your angular project adding this line to your angular.json file inside build json tag:
@@ -45,13 +46,13 @@ Avoid comonjs warning in your angular project adding this line to your angular.j
 Start your angular project
 
 `
-npm run start
+$ npm run start
 `
 
 Build your angular project
 
 `
-npm run build
+$ npm run build
 `
 
 ![Scatter Plot Sample](captures/scatter-plot-sample.png "Scatter Plot Sample")
