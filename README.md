@@ -66,13 +66,13 @@ Avoid comonjs warning in your angular project adding this line to your angular.j
 ]
 `
 
-Start your project
+Start your angular project
 
 `
 npm run start
 `
 
-Build your project
+Build your angular project
 
 `
 npm run build
