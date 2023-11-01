@@ -28,7 +28,7 @@ Compile the library to be used in typescript
 $ npm run build-library
 `
 
-Copy dist folder generated inside the component folder in your angular project with the last build prepared for typescript
+Copy dist folder generated inside the component folder into your angular project with the last build prepared for typescript
 
 `
 cp ./dist $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot -R
