@@ -16,7 +16,7 @@ Install d3-scale types
 npm install @types/d3-scale --save-dev
 `
 
-Clone the repo component
+Clone the repo [regl-scatterplot](https://github.com/flekschas/regl-scatterplot) component
 
 `
 $ git clone https://github.com/flekschas/regl-scatterplot/tree/master
