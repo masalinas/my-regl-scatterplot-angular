@@ -77,3 +77,5 @@ Build your angular project
 `
 npm run build
 `
+
+![Scatter Plot Sample](captures/scatter-plot-sample.png "Scatter Plot Sample")
