@@ -52,13 +52,13 @@ Compile the library
 $ npm run build-library
 `
 
-Copy dist folder inside 
+Copy dist folder generated inside the component folder in your angular project with the last build prepared for typescript
 
 `
-cp ./dist /home/miguel/Sources/my-regl-scatterplot-angular/node_modules/regl-scatterplot
+cp ./dist $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot -R
 `
 
-Avoid comonjs warning adding this line to your angular.json file inside build json tag:
+Avoid comonjs warning in your angular project adding this line to your angular.json file inside build json tag:
 
 `
 "allowedCommonJsDependencies": [
