@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/my-regl-scatterplot-angular'),
+      dir: require('path').join(__dirname, './coverage/poc-regl-scatterplot-angular'),
       subdir: '.',
       reporters: [
         { type: 'html' },
