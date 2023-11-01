@@ -1,6 +1,6 @@
 # Description
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
+A simple PoC where integrate the [regl-scatterplot](https://github.com/flekschas/regl-scatterplot) component in a Angular project
 
 ## Integrating steps
 
