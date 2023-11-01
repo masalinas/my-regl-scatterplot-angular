@@ -32,6 +32,8 @@ Copy dist folder generated inside the component folder into your angular project
 
 `
 $ rm $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot/dist -R
+`
+`
 $ cp ./dist $HOME/git/poc-regl-scatterplot-angular/node_modules/regl-scatterplot -R
 `
 
