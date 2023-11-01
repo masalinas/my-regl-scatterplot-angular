@@ -22,7 +22,7 @@ Clone the repo [regl-scatterplot](https://github.com/flekschas/regl-scatterplot)
 $ git clone https://github.com/flekschas/regl-scatterplot/tree/master
 `
 
-Compile the library
+Compile the library to be used in typescript
 
 `
 $ npm run build-library
