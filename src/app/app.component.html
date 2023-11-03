@@ -1,4 +1,32 @@
-<canvas #canvasPlot></canvas>
-<div class="panel panel-default">
-    <div class="panel-body">A Basic Panel</div>
+<div class="flex align-items-center justify-content-center">
+    <canvas #canvasPlot></canvas>
+    
+    <div #canvasTooltip>
+        <div id="tooltiptext">            
+            <div>{{ pointHover.code }}</div>
+            <div>{{ pointHover.description }}</div>
+            <div>{{ pointHover.type }}</div>
+        </div>
+    </div>
+
+    <div>
+        <button pButton pRipple label="clear" class="button-clear p-button-success" (click)="onClear()"></button>
+
+        <p-table [value]="points" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-point>
+                <tr>
+                    <td>{{ point.code }}</td>
+                    <td>{{ point.description }}</td>
+                    <td>{{ point.type }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
 </div>

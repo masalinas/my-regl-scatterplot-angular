@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import { Numeric } from 'd3';
 
 import createScatterplot from 'regl-scatterplot';
 
@@ -11,33 +12,52 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('canvasPlot')
   canvas: ElementRef = {} as ElementRef;
 
+  @ViewChild('canvasTooltip')
+  tooltip: ElementRef = {} as ElementRef;
+
   colorGroups = ['#52FF33', '#FF5E33', '#337AFF'];
   
   dataset: any[] = [
     {
       x: 0.2,
       y: -0.1,
-      code: 'Code 01',
+      code: 'COD01',
+      description: 'Sample 01',
+      type: 'Type A',
       group: 'A'
     },
     {
       x: 0.3,
       y: 0.1,
-      code: 'Code 02',
+      code: 'COD02',
+      description: 'Sample 02',
+      type: 'Type B',
       group: 'B'
     },
     {
       x: -0.9,
       y: 0.8,
-      code: 'Code 03',
+      code: 'COD03',
+      description: 'Sample 03',
+      type: 'Type B',
       group: 'B'
-    }
+    },
+        {
+      x: 0.0,
+      y: 0.0,
+      code: 'COD04',
+      description: 'Sample 04',
+      type: 'Type C',
+      group: 'C'
+    },
   ];
       
   pointSamples: Array<Array<number>> = [];
-  pointSelected: any;
-  pointHover: any;
-
+  points: any = [];
+  pointHover: any = {};
+  pointPosition: any;
+  tooltipPointX: number = 0;
+  tooltipPointY: number = 0;
   width: number = 600;
   height: number = 400;
 
@@ -59,7 +79,7 @@ export class AppComponent implements AfterViewInit {
       }
     }
   }
-
+  
   ngAfterViewInit() {    
     const canvas = this.canvas.nativeElement;
     const width = this.width;
@@ -69,27 +89,45 @@ export class AppComponent implements AfterViewInit {
       canvas,
       width,
       height,
-      backgroundColor: "#000000"
+      backgroundColor: "#000000" // not works!!
     });
 
-    scatterplot.subscribe("select", ({ points }) => {
-      canvas.value = points;
+    scatterplot.subscribe("select", ({ points: selectedPoints }) => {
+      canvas.value = selectedPoints;
       canvas.dispatchEvent(new Event("input"));
 
-      this.pointSelected = [];
-      for (let i = 0; i < points.length; i++) {
-        this.pointSelected.push(this.dataset[points[i]]);
+      this.points = [];
+      for (let i = 0; i < selectedPoints.length; i++) {
+        this.points.push(this.dataset[selectedPoints[i]]);
       }
 
-      console.log(this.pointSelected);
+      console.log(this.points);
     });
     
     scatterplot.subscribe("pointOver", (point) => {
+      // set the index hovered point
       this.pointHover = this.dataset[point];
 
-      console.log(this.dataset[point]);
-    });
+      //console.log(this.pointHover);      
+ 
+      // get position of the hovered point
+      this.pointPosition = scatterplot.getScreenPosition(point)
+      //this.tooltipPointX = this.pointPosition[0];
+      //this.tooltipPointY = this.pointPosition[1];
+      //console.log(this.pointPosition);
+
+      // show the tooltip
+      this.tooltip.nativeElement.style.visibility = 'visible';
+      this.tooltip.nativeElement.style.position = 'absolute';
+      this.tooltip.nativeElement.style.left = this.pointPosition[0] + 170 + "px";
+      this.tooltip.nativeElement.style.top = this.pointPosition[1] + 10 + "px";
+    });      
     
+    scatterplot.subscribe("pointOut", (point) => {
+      // hide the tooltip
+      this.tooltip.nativeElement.style.visibility = 'hidden';
+    });     
+        
     // setting random points
     /*const points = new Array(10000)
       .fill(null)
@@ -131,4 +169,8 @@ export class AppComponent implements AfterViewInit {
 
     scatterplot.draw(this.pointSamples);
   }    
+
+  onClear() {
+    this.points = [];
+  }
 }
