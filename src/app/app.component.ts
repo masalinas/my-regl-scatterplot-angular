@@ -15,8 +15,10 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('canvasTooltip')
   tooltip: ElementRef = {} as ElementRef;
 
+  // sample color groups
   colorGroups = ['#52FF33', '#FF5E33', '#337AFF'];
   
+  // sample data points
   dataset: any[] = [
     {
       x: 0.2,
@@ -62,6 +64,7 @@ export class AppComponent implements AfterViewInit {
   height: number = 400;
 
   constructor() { 
+    // resolve mousemove error: Unable to preventDefault inside passive event listener invocation.
     window.addEventListener('mousemove', function() {
     }, { passive: false });
     
@@ -78,6 +81,10 @@ export class AppComponent implements AfterViewInit {
         this.pointSamples.push([this.dataset[i].x, this.dataset[i].y, 2]);
       }
     }
+  }
+  
+  onClear() {
+    this.points = [];
   }
   
   ngAfterViewInit() {    
@@ -105,10 +112,11 @@ export class AppComponent implements AfterViewInit {
     });
     
     scatterplot.subscribe("pointOver", (point) => {
+      // get canvas position
+      const { top, left } = scatterplot.get('canvas').getBoundingClientRect()
+
       // set the index hovered point
       this.pointHover = this.dataset[point];
-
-      //console.log(this.pointHover);      
  
       // get position of the hovered point
       this.pointPosition = scatterplot.getScreenPosition(point)
@@ -119,8 +127,8 @@ export class AppComponent implements AfterViewInit {
       // show the tooltip
       this.tooltip.nativeElement.style.visibility = 'visible';
       this.tooltip.nativeElement.style.position = 'absolute';
-      this.tooltip.nativeElement.style.left = this.pointPosition[0] + 170 + "px";
-      this.tooltip.nativeElement.style.top = this.pointPosition[1] + 10 + "px";
+      this.tooltip.nativeElement.style.left = this.pointPosition[0] + left + "px";
+      this.tooltip.nativeElement.style.top = this.pointPosition[1] + top + "px";
     });      
     
     scatterplot.subscribe("pointOut", (point) => {
@@ -168,9 +176,5 @@ export class AppComponent implements AfterViewInit {
     });
 
     scatterplot.draw(this.pointSamples);
-  }    
-
-  onClear() {
-    this.points = [];
   }
 }
